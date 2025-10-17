@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class SortReviews extends Model
 {
     use HasFactory;
+    protected $fillable =[
+      'Sort_reviews',
+    ];
 }

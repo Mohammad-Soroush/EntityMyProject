@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class UserScheduals extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'user_scheduals',
+        'date',
+        'time'
+    ];
 }

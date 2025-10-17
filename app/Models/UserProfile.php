@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class UserProfile extends Model
 {
     use HasFactory;
+    protected $fillable = [
+      "Username",
+        "email",
+      "phonenumber",
+      "	EditAdress",
+      "setAsPrimeryAdd"
+    ];
 }
