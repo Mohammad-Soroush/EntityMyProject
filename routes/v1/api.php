@@ -56,11 +56,6 @@ Route::put('/sortreview/{sortreview}/update',[\App\Http\Controllers\SortReviewsC
 Route::delete('/sortreview/{sortreview}/delete',[\App\Http\Controllers\SortReviewsController::class,'delete']);
 
 
-Route::post('/sortreview/store',[\App\Http\Controllers\SortReviewsController::class,'store']);
-Route::get('/sortreview/{sortreview}/show',[\App\Http\Controllers\SortReviewsController::class,'show']);
-Route::put('/sortreview/{sortreview}/update',[\App\Http\Controllers\SortReviewsController::class,'update']);
-Route::delete('/sortreview/{sortreview}/delete',[\App\Http\Controllers\SortReviewsController::class,'delete']);
-
 Route::post('/promot/store',[\App\Http\Controllers\PromotController::class,'store']);
 Route::get('/promot/{promot}/show',[\App\Http\Controllers\PromotController::class,'show']);
 Route::put('/promot/{promot}/update',[\App\Http\Controllers\PromotController::class,'update']);
@@ -95,6 +90,13 @@ Route::post('/categories/store',[\App\Http\Controllers\CategoriesController::cla
 Route::get('/categories/{categories}/show',[\App\Http\Controllers\CategoriesController::class,'show']);
 Route::put('/categories/{categories}/update',[\App\Http\Controllers\CategoriesController::class,'update']);
 Route::delete('/categories/{categories}/delete',[\App\Http\Controllers\CategoriesController::class,'delete']);
+
+
+Route::post('/bookingdb/store',[\App\Http\Controllers\BookingdbController::class,'store']);
+Route::get('/bookingdb/{bookingdb}/show',[\App\Http\Controllers\BookingdbController::class,'show']);
+Route::put('/bookingdb/{bookingdb}/update',[\App\Http\Controllers\BookingdbController::class,'update']);
+Route::delete('/bookingdb/{bookingdb}/delete',[\App\Http\Controllers\BookingdbController::class,'delete']);
+
 //Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //    return $request->user();
 //});

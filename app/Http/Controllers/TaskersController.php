@@ -2,17 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TaskerStoreValidation;
+use App\Http\Requests\TaskerUpdateValidation;
+use App\Http\Resources\TaskerDeleteResource;
+use App\Http\Resources\TaskerShowResource;
+use App\Http\Resources\TaskerStoreResource;
+use App\Http\Resources\TaskerUpdateResource;
 use App\Models\Taskers;
 use Illuminate\Http\Request;
 
 class TaskersController extends Controller
 {
-    public function store(Request $request)
+    public function store(TaskerStoreValidation $taskerstorevalidation)
     {
-        $Taskers = Taskers::create($request ->all());
+        $Taskers = Taskers::create($taskerstorevalidation ->all());
         return response()->json([
             'message'=>'store has been successfully',
-            'data'=>$Taskers
+            'data'=> new TaskerStoreResource($Taskers)
         ]);
     }
 
@@ -20,17 +26,17 @@ class TaskersController extends Controller
     {
         return response()->json([
             'message'=>'Show has been successfully',
-            'data'=>$taskers
+            'data'=>new TaskerShowResource($taskers)
         ]);
     }
 
-    public function update(Taskers $taskers, Request $request)
+    public function update(Taskers $taskers, TaskerUpdateValidation $taskerupdatevalidation)
     {
-        $taskers -> update(\request()->all());
+        $taskers -> update($taskerupdatevalidation->all());
         $taskers = Taskers::find($taskers -> id);
         return response()->json([
             'message'=>'update has been successfully',
-            'data'=>$taskers
+            'data'=>new TaskerUpdateResource($taskers)
         ]);
     }
 
@@ -39,7 +45,7 @@ class TaskersController extends Controller
         $taskers ->delete();
         return response()->json([
             'message'=>'delete has been successfully',
-            'data'=>$taskers
+            'data'=>new TaskerDeleteResource($taskers)
         ]);
     }
 }

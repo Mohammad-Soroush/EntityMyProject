@@ -2,17 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserProfileStoreValidation;
+use App\Http\Requests\UserProfileUpdateValidation;
+use App\Http\Resources\UserProfileDeleteResource;
+use App\Http\Resources\UserProfileShowResource;
+use App\Http\Resources\UserProfileStoreResource;
+use App\Http\Resources\UserProfileUpdateResourser;
 use App\Models\UserProfile;
 use Illuminate\Http\Request;
 
 class UserProfileController extends Controller
 {
-    public function store(Request $request)
+    public function store(UserProfileStoreValidation $userprofilestorevalidation)
     {
-        $UserProfile = UserProfile::create($request -> all());
+        $UserProfile = UserProfile::create($userprofilestorevalidation -> all());
         return response()->json([
            'message'=>'create has been successfully',
-            'data' => $UserProfile
+            'data' => new UserProfileStoreResource($UserProfile)
         ]);
     }
 
@@ -21,17 +27,17 @@ class UserProfileController extends Controller
 
             return response() -> json([
                'message' => 'userprofile has been fetch successfully',
-                'data' => $userprofile
+                'data' => new UserProfileShowResource($userprofile)
             ]);
     }
 
-    public function update(UserProfile $userprofile, Request $request)
+    public function update(UserProfile $userprofile, UserProfileUpdateValidation $userprofileupdatevalidation)
     {
-       $userprofile -> update(\request()->all());
+       $userprofile -> update($userprofileupdatevalidation->all());
        $userprofile = UserProfile::find($userprofile->id);
        return response()->json([
           'message'=>'update has been successfully',
-           'data'=> $userprofile
+           'data'=> new UserProfileUpdateResourser($userprofile)
        ]);
     }
 
@@ -40,7 +46,7 @@ class UserProfileController extends Controller
         $userprofile -> delete();
         return response()->json([
            'message'=>'delete has been successfully',
-           'data'=> $userprofile
+           'data'=> new UserProfileDeleteResource($userprofile)
         ]);
     }
 }
