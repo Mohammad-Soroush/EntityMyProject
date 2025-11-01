@@ -31,7 +31,7 @@ class LoginandsignupController extends Controller
     public function update(Loginandsignup $loginandsignup, Request $request)
     {
         $loginandsignup -> update(\request()->all());
-        $loginandsignup = PastTasks::find($loginandsignup->id);
+        $loginandsignup = Loginandsignup::find($loginandsignup->id);
         return response()->json([
             'message'=>'update has been successfully',
             'data'=> $loginandsignup

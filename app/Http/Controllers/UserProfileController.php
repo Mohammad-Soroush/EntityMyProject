@@ -9,10 +9,29 @@ use App\Http\Resources\UserProfileShowResource;
 use App\Http\Resources\UserProfileStoreResource;
 use App\Http\Resources\UserProfileUpdateResourser;
 use App\Models\UserProfile;
+use Couchbase\User;
 use Illuminate\Http\Request;
 
 class UserProfileController extends Controller
 {
+    public function index(UserProfile $userprofile)
+    {
+        $user = UserProfile::all();
+        return response()->json([
+            'message'=>"Show index has been successfully",
+            'data'=>$user
+        ]);
+    }
+
+        public function createtoken(UserProfile $userprofile)
+        {
+            $usertoken = $userprofile->createToken('User | Api');
+            return response()->json([
+                'message'=>'توکن کاربر با موفقیت صادر شد',
+                'token'=>$usertoken->plainTextToken,
+                'user'=>$userprofile
+            ],200);
+        }
     public function store(UserProfileStoreValidation $userprofilestorevalidation)
     {
         $UserProfile = UserProfile::create($userprofilestorevalidation -> all());
@@ -24,10 +43,9 @@ class UserProfileController extends Controller
 
     public function show(UserProfile $userprofile)
     {
-
             return response() -> json([
                'message' => 'userprofile has been fetch successfully',
-                'data' => new UserProfileShowResource($userprofile)
+                'data' => new UserProfileStoreResource($userprofile)
             ]);
     }
 

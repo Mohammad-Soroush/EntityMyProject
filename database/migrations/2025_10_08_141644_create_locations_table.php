@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('locations', function (Blueprint $table) {
             $table->id();
             $table->string('Ctiy_name');
-            $table->enum('location_type',['automatically','maually']);
+            $table->enum('location_type',['urban','rural']);
             $table->timestamps();
         });
     }

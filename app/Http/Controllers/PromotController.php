@@ -29,7 +29,7 @@ class PromotController extends Controller
     public function update(Promot $promot, Request $request)
     {
         $promot -> update(\request()->all());
-        $promot = SortReviews::find($promot->id);
+        $promot = Promot::find($promot->id);
         return response()->json([
             'message'=>'update has been successfully',
             'data'=> $promot
